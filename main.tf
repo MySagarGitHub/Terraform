@@ -2,14 +2,6 @@
 #   region = "us-east-1"
 # }
 
-# resource "aws_instance" "my_ec2" {
-#   ami           = "ami-0hsjdglFGYB358b87c7116"   # Amazon Linux 2 (us-east-1)
-#   instance_type = "t3.micro"
-
-#   tags = {
-#     Name = "Terraform-EC2"
-#   }
-# }
 
 # variables 
 provider "aws" {
@@ -23,6 +15,15 @@ data "aws_ami" "amazon_linux" {
   filter {
     name   = "name"
     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+}
+resource "aws_instance" "my_ec2" {
+  ami           = data.aws_ami.amazon_linux.id   # Amazon Linux 2 (us-east-1)
+  instance_type = var.instance_type
+
+  tags = {
+    Name = "EC2-${terraform.workspace}"
+    environment = terraform.workspace
   }
 }
 
@@ -46,10 +47,10 @@ data "aws_ami" "amazon_linux" {
 #   ]
 # }
 
-module "ec2_instance" {
-  source        = "./ec2-module"
-  ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t3.micro"
-  name          = "my-module-ec2"
+# module "ec2_instance" {
+#   source        = "./ec2-module"
+#   ami           = data.aws_ami.amazon_linux.id
+#   instance_type = "t3.micro"
+#   name          = "my-module-ec2"
   
-}
+# }

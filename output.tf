@@ -4,4 +4,6 @@
 #   description = "The public IP address of the EC2 instance"
 # }
 
- 
+ output "workspace" {
+   value = terraform.workspace
+ }
