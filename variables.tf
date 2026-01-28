@@ -15,3 +15,7 @@ variable "instance_name" {
   default   = "Terraform-EC2"
 
 }
+variable "bucket_name" {
+
+  default   = "my-bucket-terraform-987654321"
+}       
