@@ -4,3 +4,4 @@
  terraform plan<br>
  terraform apply
  <br>
+ terraform workspace new dev/stage/prod
